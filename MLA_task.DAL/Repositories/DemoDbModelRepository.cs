@@ -25,9 +25,11 @@ namespace MLA_task.DAL.Repositories
 
         public async Task<DemoCommonInfoDbModel> GetCommonInfoByDemoIdAsync(int demoDbModelId)
         {
-            var demoModel = await _context.DemoDbModels.SingleAsync(item => item.Id == demoDbModelId);
+            var demoModel = 
+                await _context.DemoDbModels.SingleAsync(item => item.Id == demoDbModelId);
 
-            var commonInfo = await _context.DemoCommonInfoModels.SingleAsync(item => item.Id == demoModel.DemoCommonInfoModelId);
+            var commonInfo = 
+                await _context.DemoCommonInfoModels.SingleAsync(item => item.Id == demoModel.DemoCommonInfoModelId);
 
             return commonInfo;
         }

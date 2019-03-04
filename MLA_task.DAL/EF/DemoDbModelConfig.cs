@@ -13,7 +13,8 @@ namespace MLA_task.DAL.EF
             Property(m => m.Created).IsRequired();
             Property(m => m.Modified).IsOptional();
             Property(m => m.DemoCommonInfoModelId).IsRequired();
-            HasRequired(m => m.DemoCommonInfoModel).WithMany(i => i.DemoModels);
+            HasRequired(m => m.DemoCommonInfoModel)
+                .WithMany(i => i.DemoModels);
         }
     }
 }

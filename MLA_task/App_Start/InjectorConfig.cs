@@ -30,10 +30,8 @@ namespace MLA_task
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
         }
 
-        private static void RegisterContainer(Container container)
-        {
-           DependencyResolver.DependencyResolver.Resolve(container);
-        }
+        private static void RegisterContainer(Container container) =>
+            DependencyResolver.DependencyResolver.Resolve(container);
 
         private static Assembly[] GetAssemblies()
         {
