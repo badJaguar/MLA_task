@@ -66,9 +66,9 @@
     <Compile Include="Repositories\DemoDbModelRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MLA_task.DAL.Interface\MLA_task.DAL.Interface.csproj">
+    <ProjectReference Include="..\MLA_task.DAL.Interface\2_MLA_task.DAL.Interface.csproj">
       <Project>{56a5ced4-4756-43a0-8539-f4092d26009c}</Project>
-      <Name>MLA_task.DAL.Interface</Name>
+      <Name>2_MLA_task.DAL.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

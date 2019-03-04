@@ -7,13 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLA_task", "MLA_task\MLA_ta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyResolver", "DependencyResolver\DependencyResolver.csproj", "{E96459C5-DAEA-4FC5-AA77-D262EDDF0121}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLA_task.BLL.Interface", "MLA_task.BLL.Interface\MLA_task.BLL.Interface.csproj", "{D701022C-1EB9-4F99-820A-A0C3DE62CD60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4_MLA_task.BLL.Interface", "MLA_task.BLL.Interface\4_MLA_task.BLL.Interface.csproj", "{D701022C-1EB9-4F99-820A-A0C3DE62CD60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLA_task.BLL", "MLA_task.BLL\MLA_task.BLL.csproj", "{44E3FAC2-BEA9-4F4F-88AD-C8819EB3DF9F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3_MLA_task.BLL", "MLA_task.BLL\3_MLA_task.BLL.csproj", "{44E3FAC2-BEA9-4F4F-88AD-C8819EB3DF9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLA_task.DAL.Interface", "MLA_task.DAL.Interface\MLA_task.DAL.Interface.csproj", "{56A5CED4-4756-43A0-8539-F4092D26009C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_MLA_task.DAL.Interface", "MLA_task.DAL.Interface\2_MLA_task.DAL.Interface.csproj", "{56A5CED4-4756-43A0-8539-F4092D26009C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MLA_task.DAL", "MLA_task.DAL\MLA_task.DAL.csproj", "{B7382AD4-24F3-4EB4-8F1E-8BB283954BFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_MLA_task.DAL", "MLA_task.DAL\1_MLA_task.DAL.csproj", "{B7382AD4-24F3-4EB4-8F1E-8BB283954BFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
