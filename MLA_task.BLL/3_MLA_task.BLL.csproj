@@ -44,13 +44,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MLA_task.BLL.Interface\MLA_task.BLL.Interface.csproj">
+    <ProjectReference Include="..\MLA_task.BLL.Interface\4_MLA_task.BLL.Interface.csproj">
       <Project>{d701022c-1eb9-4f99-820a-a0c3de62cd60}</Project>
-      <Name>MLA_task.BLL.Interface</Name>
+      <Name>4_MLA_task.BLL.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MLA_task.DAL.Interface\MLA_task.DAL.Interface.csproj">
+    <ProjectReference Include="..\MLA_task.DAL.Interface\2_MLA_task.DAL.Interface.csproj">
       <Project>{56a5ced4-4756-43a0-8539-f4092d26009c}</Project>
-      <Name>MLA_task.DAL.Interface</Name>
+      <Name>2_MLA_task.DAL.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

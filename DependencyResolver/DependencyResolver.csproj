@@ -47,21 +47,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MLA_task.BLL.Interface\MLA_task.BLL.Interface.csproj">
+    <ProjectReference Include="..\MLA_task.BLL.Interface\4_MLA_task.BLL.Interface.csproj">
       <Project>{d701022c-1eb9-4f99-820a-a0c3de62cd60}</Project>
-      <Name>MLA_task.BLL.Interface</Name>
+      <Name>4_MLA_task.BLL.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MLA_task.BLL\MLA_task.BLL.csproj">
+    <ProjectReference Include="..\MLA_task.BLL\3_MLA_task.BLL.csproj">
       <Project>{44e3fac2-bea9-4f4f-88ad-c8819eb3df9f}</Project>
-      <Name>MLA_task.BLL</Name>
+      <Name>3_MLA_task.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MLA_task.DAL.Interface\MLA_task.DAL.Interface.csproj">
+    <ProjectReference Include="..\MLA_task.DAL.Interface\2_MLA_task.DAL.Interface.csproj">
       <Project>{56a5ced4-4756-43a0-8539-f4092d26009c}</Project>
-      <Name>MLA_task.DAL.Interface</Name>
+      <Name>2_MLA_task.DAL.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MLA_task.DAL\MLA_task.DAL.csproj">
+    <ProjectReference Include="..\MLA_task.DAL\1_MLA_task.DAL.csproj">
       <Project>{b7382ad4-24f3-4eb4-8f1e-8bb283954bfb}</Project>
-      <Name>MLA_task.DAL</Name>
+      <Name>1_MLA_task.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

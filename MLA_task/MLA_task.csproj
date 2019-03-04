@@ -353,9 +353,9 @@
       <Project>{e96459c5-daea-4fc5-aa77-d262eddf0121}</Project>
       <Name>DependencyResolver</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MLA_task.BLL.Interface\MLA_task.BLL.Interface.csproj">
+    <ProjectReference Include="..\MLA_task.BLL.Interface\4_MLA_task.BLL.Interface.csproj">
       <Project>{d701022c-1eb9-4f99-820a-a0c3de62cd60}</Project>
-      <Name>MLA_task.BLL.Interface</Name>
+      <Name>4_MLA_task.BLL.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
