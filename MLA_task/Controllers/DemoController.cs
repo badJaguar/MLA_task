@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using MLA_task.BLL.Interface;
 using MLA_task.BLL.Interface.Exceptions;
+using MLA_task.BLL.Interface.Models;
 using NLog;
+using Swashbuckle.Swagger.Annotations;
 
 namespace MLA_task.Controllers
 {
+    [ApiVersion("1.0")]
+    [System.Web.Http.RoutePrefix("api/models")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [SwaggerResponseRemoveDefaults]
     public class DemoController : ApiController
     {
         private readonly ILogger _logger;
@@ -23,12 +32,16 @@ namespace MLA_task.Controllers
             _demoModelService = demoModelService;
         }
 
-        //public async Task<IHttpActionResult> Get()
-        //{
-        //    var models = await _context.DemoDbModels.ToListAsync();
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("")]
+        [SwaggerResponse(HttpStatusCode.OK, Description = "Returns a list models.", Type = typeof(DemoModel[]))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        public async Task<IHttpActionResult> Get()
+        {
+            var models = await _demoModelService.GetDemoModelsAsync().ConfigureAwait(true);
 
-        //    return Ok(models.Select(model => new { Id = model.Id, Name = model.Name, InfoId = model.DemoCommonInfoModelId, Info = model.DemoCommonInfoModel.CommonInfo }));
-        //}
+            return Ok(models);
+        }
 
         // GET: Demo
         public async Task<IHttpActionResult> Get(int id)

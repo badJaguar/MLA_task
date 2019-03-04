@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using MLA_task.BLL.Interface;
 using MLA_task.BLL.Interface.Exceptions;
 using MLA_task.BLL.Interface.Models;
 using MLA_task.DAL.Interface;
+using MLA_task.DAL.Interface.Entities;
 
 namespace MLA_task.BLL
 {
@@ -38,6 +40,15 @@ namespace MLA_task.BLL
             };
 
             return demoModel;
+        }
+
+        public async Task<List<DemoModel>> GetDemoModelsAsync()
+        {
+            var commonInfos = await _demoDbModelRepository.GetCommonInfosAsync();
+            var dbModels = await _demoDbModelRepository.GetAll();
+
+            var models = dbModels.Select(Mapper.Map<DemoDbModel>).ToList();
+            return models.Select(Mapper.Map<DemoModel>).ToList();
         }
     }
 }

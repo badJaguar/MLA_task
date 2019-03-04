@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using MLA_task.DAL.EF;
@@ -23,6 +24,12 @@ namespace MLA_task.DAL.Repositories
             return model;
         }
 
+        public async Task<List<DemoDbModel>> GetAll()
+        {
+            var models = await _context.DemoDbModels.ToListAsync();
+            return models;
+        }
+
         public async Task<DemoCommonInfoDbModel> GetCommonInfoByDemoIdAsync(int demoDbModelId)
         {
             var demoModel = 
@@ -32,6 +39,17 @@ namespace MLA_task.DAL.Repositories
                 await _context.DemoCommonInfoModels.SingleAsync(item => item.Id == demoModel.DemoCommonInfoModelId);
 
             return commonInfo;
+        }
+
+        public async Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync()
+        {
+            var demoModel =
+                await _context.DemoDbModels.ToListAsync();
+
+            var commonInfo =
+                await _context.DemoCommonInfoModels.SingleAsync(item => Equals(item.DemoModels, demoModel));
+
+            return new List<DemoCommonInfoDbModel> {commonInfo};
         }
     }
 }

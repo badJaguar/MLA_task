@@ -10,7 +10,9 @@ namespace MLA_task.DAL.Interface
     public interface IDemoDbModelRepository
     {
         Task<DemoDbModel> GetByIdAsync(int id);
+        Task<List<DemoDbModel>> GetAll();
 
         Task<DemoCommonInfoDbModel> GetCommonInfoByDemoIdAsync(int demoDbModelId);
+        Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync();
     }
 }
