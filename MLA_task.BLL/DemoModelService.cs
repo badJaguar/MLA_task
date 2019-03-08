@@ -44,11 +44,14 @@ namespace MLA_task.BLL
 
         public async Task<List<DemoModel>> GetDemoModelsAsync()
         {
-            var commonInfos = await _demoDbModelRepository.GetCommonInfosAsync();
-            var dbModels = await _demoDbModelRepository.GetAll();
+            var dbModel = await _demoDbModelRepository.GetAll();
+            var commonInfo = await _demoDbModelRepository.GetCommonInfosAsync();
 
-            var models = dbModels.Select(Mapper.Map<DemoDbModel>).ToList();
-            return models.Select(Mapper.Map<DemoModel>).ToList();
+            var demoModel = new List<DemoModel>
+            {
+                
+            };
+            return demoModel;
         }
     }
 }
