@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MLA_task.App_Start;
 
 namespace MLA_task
 {
@@ -16,7 +17,7 @@ namespace MLA_task
             InjectorConfig.Configure(GlobalConfiguration.Configuration);
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            //MapperConfig.Configure();
+            MapperConfig.Configure();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

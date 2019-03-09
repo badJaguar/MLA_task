@@ -42,13 +42,19 @@ namespace MLA_task.BLL
             return demoModel;
         }
 
+        // I can not set up an AutoMapper
         public async Task<List<DemoModel>> GetDemoModelsAsync()
         {
-            var commonInfos = await _demoDbModelRepository.GetCommonInfosAsync();
             var dbModels = await _demoDbModelRepository.GetAll();
+            //var commonInfo = await _demoDbModelRepository.GetCommonInfosAsync();
 
-            var models = dbModels.Select(Mapper.Map<DemoDbModel>).ToList();
-            return models.Select(Mapper.Map<DemoModel>).ToList();
+            var demoModels = dbModels.Select(Mapper.Map<DemoModel>).ToList();
+            //var demoModels = dbModels.Select(model => new DemoModel {
+            //    Id = model.Id,
+            //    Name = model.Name,
+            //    CommonInfo = model.DemoCommonInfoModel.CommonInfo}).ToList();
+            
+            return demoModels;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace MLA_task.Controllers
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
         public async Task<IHttpActionResult> Get()
         {
-            var models = await _demoModelService.GetDemoModelsAsync().ConfigureAwait(true);
+            var models = await _demoModelService.GetDemoModelsAsync();
 
             return Ok(models);
         }
