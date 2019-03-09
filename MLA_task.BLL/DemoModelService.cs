@@ -43,32 +43,14 @@ namespace MLA_task.BLL
         public async Task<DemoModel> AddDemoModelAsync(DemoModel model)
         {
             var result = _mapper.Map<DemoModel>(model);
-            var searchRes = await _demoDbModelRepository.GetByIdAsync(model.Id);
-            if (searchRes.Id == model.Id)
-            {
-                throw new ArgumentException();
-            }
+
             result.Id = model.Id + 1;
             result.CommonInfo = model.CommonInfo;
             result.Created = DateTime.UtcNow;
             result.Modified = DateTime.Now;
-            result.Name = null;
+            result.Name = "'Default name' please change.";
 
             return result;
         }
-        //var dbHives = await _context.Hives.Where(h => h.Code == createRequest.Code).ToArrayAsync();
-        //    if (dbHives.Length > 0)
-        //{
-        //    throw new RequestedResourceHasConflictException("code");
-        //}
-
-        //var dbHive = Mapper.Map<UpdateHiveRequest, DbHive>(createRequest);
-        //dbHive.CreatedBy = _userContext.UserId;
-        //dbHive.LastUpdatedBy = _userContext.UserId;
-        //_context.Hives.Add(dbHive);
-
-        //await _context.SaveChangesAsync();
-
-        //    return Mapper.Map<Hive>(dbHive);
     }
 }

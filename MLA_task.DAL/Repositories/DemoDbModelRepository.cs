@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,6 +33,7 @@ namespace MLA_task.DAL.Repositories
 
         public async Task<DemoDbModel> AddAsync(DemoDbModel dbModel)
         {
+            
             var model = _context.DemoDbModels.Add(dbModel);
             await _context.SaveChangesAsync();
             return model;
@@ -46,6 +48,11 @@ namespace MLA_task.DAL.Repositories
                 await _context.DemoCommonInfoModels.SingleAsync(item => item.Id == demoModel.DemoCommonInfoModelId);
 
             return commonInfo;
+        }
+
+        public async Task<IEnumerable<T>> Find<T>(Func<T, bool> predicate) where T : class
+        {
+            return await Task.FromResult(_context.Set<T>().Where(predicate));
         }
 
         //public async Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync()

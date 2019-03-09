@@ -85,14 +85,15 @@ namespace MLA_task.Controllers
         {
             _logger.Info($"adding model with name {model.Name}");
 
-            if (model.Name == "bla-bla")
+            if (string.IsNullOrWhiteSpace(model.Name))
             {
                 _logger.Info($"Wrong model name {model.Name} detected");
             }
 
             try
             {
-                 await _demoModelService.AddDemoModelAsync(model);
+                var result =  await _demoModelService.AddDemoModelAsync(model);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -100,7 +101,6 @@ namespace MLA_task.Controllers
                 return this.InternalServerError();
             }
 
-            return Ok();
         }
     }
 }
