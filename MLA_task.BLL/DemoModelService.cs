@@ -15,10 +15,12 @@ namespace MLA_task.BLL
     public class DemoModelService : IDemoModelService
     {
         private readonly IDemoDbModelRepository _demoDbModelRepository;
+        private IMapper _mapper;
 
-        public DemoModelService(IDemoDbModelRepository demoDbModelRepository)
+        public DemoModelService(IDemoDbModelRepository demoDbModelRepository, IMapper mapper)
         {
             _demoDbModelRepository = demoDbModelRepository;
+            _mapper = mapper;
         }
 
         public async Task<DemoModel> GetDemoModelByIdAsync(int id)
@@ -27,34 +29,15 @@ namespace MLA_task.BLL
                 throw new DemoServiceException(DemoServiceException.ErrorType.WrongId);
             }
 
-            var dbModel = await _demoDbModelRepository.GetByIdAsync(id);
-            var commonInfo = await _demoDbModelRepository.GetCommonInfoByDemoIdAsync(id);
-
-            var demoModel = new DemoModel
-            {
-                Id = dbModel.Id,
-                Name = dbModel.Name,
-                Created = dbModel.Created,
-                Modified = dbModel.Modified,
-                CommonInfo = commonInfo.CommonInfo
-            };
-
-            return demoModel;
+            return await _demoDbModelRepository.GetByIdAsync(id)
+                .ContinueWith(t => _mapper.Map<DemoModel>(t.Result));
         }
-
-        // I can not set up an AutoMapper
+        
         public async Task<List<DemoModel>> GetDemoModelsAsync()
         {
-            var dbModels = await _demoDbModelRepository.GetAll();
-            //var commonInfo = await _demoDbModelRepository.GetCommonInfosAsync();
-
-            var demoModels = dbModels.Select(Mapper.Map<DemoModel>).ToList();
-            //var demoModels = dbModels.Select(model => new DemoModel {
-            //    Id = model.Id,
-            //    Name = model.Name,
-            //    CommonInfo = model.DemoCommonInfoModel.CommonInfo}).ToList();
-            
-            return demoModels;
+            return await _demoDbModelRepository.GetAll()
+                .ContinueWith(task =>
+                    _mapper.Map<List<DemoModel>>(task.Result));
         }
     }
 }
