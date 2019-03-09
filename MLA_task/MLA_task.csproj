@@ -564,6 +564,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\InjectorConfig.cs" />
+    <Compile Include="App_Start\MapperConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -714,6 +715,10 @@
     <ProjectReference Include="..\MLA_task.BLL.Interface\4_MLA_task.BLL.Interface.csproj">
       <Project>{d701022c-1eb9-4f99-820a-a0c3de62cd60}</Project>
       <Name>4_MLA_task.BLL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MLA_task.BLL\3_MLA_task.BLL.csproj">
+      <Project>{44E3FAC2-BEA9-4F4F-88AD-C8819EB3DF9F}</Project>
+      <Name>3_MLA_task.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

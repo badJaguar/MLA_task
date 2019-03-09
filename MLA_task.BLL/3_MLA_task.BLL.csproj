@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DemoModelMappingProfile.cs" />
     <Compile Include="DemoModelService.cs" />
     <Compile Include="Mapping\DemoMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

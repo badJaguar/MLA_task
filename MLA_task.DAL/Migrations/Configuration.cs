@@ -3,10 +3,7 @@ using MLA_task.DAL.Interface.Entities;
 
 namespace MLA_task.DAL.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MLA_task.DAL.EF.DemoContext>
     {

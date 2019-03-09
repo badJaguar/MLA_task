@@ -26,7 +26,7 @@ namespace MLA_task.DAL.Repositories
 
         public async Task<List<DemoDbModel>> GetAll()
         {
-            var models = await _context.DemoDbModels.ToListAsync();
+            var models = await _context.DemoDbModels.Select(model => model).ToListAsync();
             return models;
         }
 
@@ -43,13 +43,10 @@ namespace MLA_task.DAL.Repositories
 
         public async Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync()
         {
-            var demoModel =
-                await _context.DemoDbModels.ToListAsync();
-
             var commonInfo =
-                await _context.DemoCommonInfoModels.SingleAsync(item => Equals(item.DemoModels, demoModel));
+                await _context.DemoCommonInfoModels.Select(model => model).ToListAsync();
 
-            return new List<DemoCommonInfoDbModel> {commonInfo};
+            return commonInfo;
         }
     }
 }
