@@ -30,6 +30,13 @@ namespace MLA_task.DAL.Repositories
             return models;
         }
 
+        public async Task<DemoDbModel> AddAsync(DemoDbModel dbModel)
+        {
+            var model = _context.DemoDbModels.Add(dbModel);
+            await _context.SaveChangesAsync();
+            return model;
+        }
+
         public async Task<DemoCommonInfoDbModel> GetCommonInfoByDemoIdAsync(int demoDbModelId)
         {
             var demoModel = 
@@ -41,12 +48,12 @@ namespace MLA_task.DAL.Repositories
             return commonInfo;
         }
 
-        public async Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync()
-        {
-            var commonInfo =
-                await _context.DemoCommonInfoModels.Select(model => model).ToListAsync();
+        //public async Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync()
+        //{
+        //    var commonInfo =
+        //        await _context.DemoCommonInfoModels.Select(model => model).ToListAsync();
 
-            return commonInfo;
-        }
+        //    return commonInfo;
+        //}
     }
 }

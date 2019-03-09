@@ -11,8 +11,9 @@ namespace MLA_task.DAL.Interface
     {
         Task<DemoDbModel> GetByIdAsync(int id);
         Task<List<DemoDbModel>> GetAll();
+        Task<DemoDbModel> AddAsync(DemoDbModel dbModel);
 
         Task<DemoCommonInfoDbModel> GetCommonInfoByDemoIdAsync(int demoDbModelId);
-        Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync();
+        //Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync();
     }
 }

@@ -28,9 +28,9 @@ namespace MLA_task.BLL
             if (id == 23) {
                 throw new DemoServiceException(DemoServiceException.ErrorType.WrongId);
             }
-
             return await _demoDbModelRepository.GetByIdAsync(id)
                 .ContinueWith(t => _mapper.Map<DemoModel>(t.Result));
+            
         }
         
         public async Task<List<DemoModel>> GetDemoModelsAsync()
@@ -39,5 +39,36 @@ namespace MLA_task.BLL
                 .ContinueWith(task =>
                     _mapper.Map<List<DemoModel>>(task.Result));
         }
+
+        public async Task<DemoModel> AddDemoModelAsync(DemoModel model)
+        {
+            var result = _mapper.Map<DemoModel>(model);
+            var searchRes = await _demoDbModelRepository.GetByIdAsync(model.Id);
+            if (searchRes.Id == model.Id)
+            {
+                throw new ArgumentException();
+            }
+            result.Id = model.Id + 1;
+            result.CommonInfo = model.CommonInfo;
+            result.Created = DateTime.UtcNow;
+            result.Modified = DateTime.Now;
+            result.Name = null;
+
+            return result;
+        }
+        //var dbHives = await _context.Hives.Where(h => h.Code == createRequest.Code).ToArrayAsync();
+        //    if (dbHives.Length > 0)
+        //{
+        //    throw new RequestedResourceHasConflictException("code");
+        //}
+
+        //var dbHive = Mapper.Map<UpdateHiveRequest, DbHive>(createRequest);
+        //dbHive.CreatedBy = _userContext.UserId;
+        //dbHive.LastUpdatedBy = _userContext.UserId;
+        //_context.Hives.Add(dbHive);
+
+        //await _context.SaveChangesAsync();
+
+        //    return Mapper.Map<Hive>(dbHive);
     }
 }

@@ -36,6 +36,7 @@ namespace MLA_task.Controllers
         [System.Web.Http.Route("")]
         [SwaggerResponse(HttpStatusCode.OK, Description = "Returns a list models.", Type = typeof(DemoModel[]))]
         [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        [SwaggerResponse(HttpStatusCode.NoContent, Description = "No models created.", Type = typeof(DemoModel))]
         public async Task<IHttpActionResult> Get()
         {
             var models = await _demoModelService.GetDemoModelsAsync();
@@ -43,11 +44,13 @@ namespace MLA_task.Controllers
             return Ok(models);
         }
 
-        // GET: Demo
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("{id:int:min(1)}")]
+        [SwaggerResponse(HttpStatusCode.OK, Description = "Returns a model by id.", Type = typeof(DemoModel))]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "Wrong ID")]
         public async Task<IHttpActionResult> Get(int id)
         {
-            _logger.Info($"receiving item with id {id}");
-
             try
             {
                 var model = await _demoModelService.GetDemoModelByIdAsync(id);
@@ -61,7 +64,6 @@ namespace MLA_task.Controllers
                 if (ex.Error == DemoServiceException.ErrorType.WrongId) 
                 {
                     _logger.Info(ex, $"Wrong ID {id} has been requested");
-                    return this.BadRequest("Wrong ID");
                 }
 
                 throw;
@@ -73,24 +75,32 @@ namespace MLA_task.Controllers
             }
         }
 
-        //public async Task<IHttpActionResult> Post([FromBody]DemoModel model)
-        //{
-        //    _logger.Info($"adding model with name {model.Name}");
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("")]
+        [SwaggerResponse(HttpStatusCode.Created, Description = "Creates a new demo model.")]
+        [SwaggerResponse(HttpStatusCode.BadRequest, Description = "WrongName")]
+        [SwaggerResponse(HttpStatusCode.Conflict)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        public async Task<IHttpActionResult> Post([System.Web.Http.FromBody]DemoModel model)
+        {
+            _logger.Info($"adding model with name {model.Name}");
 
-        //    if (model.Name == "bla-bla") {
-        //        _logger.Info($"Wrong model name {model.Name} detected");
-        //        return this.BadRequest("WrongName");
-        //    }
+            if (model.Name == "bla-bla")
+            {
+                _logger.Info($"Wrong model name {model.Name} detected");
+            }
 
-        //    try {
-        //        _context.DemoDbModels.Add(model);
-        //        await _context.SaveChangesAsync();
-        //    } catch (Exception ex) {
-        //        _logger.Error(ex, $"Server error occured while trying to add item with name {model.Name}");
-        //        return this.InternalServerError();
-        //    }
-           
-        //    return Ok();
-        //}
+            try
+            {
+                 await _demoModelService.AddDemoModelAsync(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"Server error occured while trying to add item with name {model.Name}");
+                return this.InternalServerError();
+            }
+
+            return Ok();
+        }
     }
 }

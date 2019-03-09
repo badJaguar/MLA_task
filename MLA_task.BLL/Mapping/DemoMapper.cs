@@ -19,11 +19,13 @@ namespace MLA_task.BLL.Mapping
             CreateMap<DemoDbModel, DemoModel>()
                 .ForMember(category => category.Id, model => model.MapFrom(categoryDb => categoryDb.Id))
                 .ForMember(category => category.Name, model => model.MapFrom(categoryDb => categoryDb.Name))
-                .ForMember(category => category.CommonInfo, model => model.MapFrom(categoryDb => categoryDb.DemoCommonInfoModel));
-            CreateMap<DemoCommonInfoDbModel, DemoCommonInfoDbModel>()
+                .ForMember(category => category.CommonInfo, model => model.MapFrom(categoryDb => categoryDb.DemoCommonInfoModel.CommonInfo));
+            CreateMap<DemoCommonInfoDbModel, DemoCommonInfoModel>()
                 .ForMember(model => model.Id, expression => expression.MapFrom(model => model.Id))
                 .ForMember(model => model.DemoModels, expression => expression.MapFrom(model => model.DemoModels))
                 .ForMember(model => model.CommonInfo, expression => expression.MapFrom(model => model.CommonInfo));
+            //CreateMap<DemoDbModel, DemoCommonInfoModel>()
+            //    .ForMember(model => model.DemoModels, expression => expression.MapFrom(model => model.DemoCommonInfoModel.DemoModels));
             //CreateMap<DemoDbModel, DemoModel>().ReverseMap()
             //    .ForMember(category => category.Id, model => model.MapFrom(categoryDb => categoryDb.Id))
             //    .ForMember(category => category.Name, model => model.MapFrom(categoryDb => categoryDb.Name))
