@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using MLA_task.BLL.Interface;
 using MLA_task.BLL.Interface.Exceptions;
 using MLA_task.BLL.Interface.Models;
 using MLA_task.DAL.Interface;
+using MLA_task.DAL.Interface.Entities;
 
 namespace MLA_task.BLL
 {
     public class DemoModelService : IDemoModelService
     {
         private readonly IDemoDbModelRepository _demoDbModelRepository;
+        private IMapper _mapper;
 
-        public DemoModelService(IDemoDbModelRepository demoDbModelRepository)
+        public DemoModelService(IDemoDbModelRepository demoDbModelRepository, IMapper mapper)
         {
             _demoDbModelRepository = demoDbModelRepository;
+            _mapper = mapper;
         }
 
         public async Task<DemoModel> GetDemoModelByIdAsync(int id)
@@ -24,20 +28,29 @@ namespace MLA_task.BLL
             if (id == 23) {
                 throw new DemoServiceException(DemoServiceException.ErrorType.WrongId);
             }
+            return await _demoDbModelRepository.GetByIdAsync(id)
+                .ContinueWith(t => _mapper.Map<DemoModel>(t.Result));
+            
+        }
+        
+        public async Task<List<DemoModel>> GetDemoModelsAsync()
+        {
+            return await _demoDbModelRepository.GetAll()
+                .ContinueWith(task =>
+                    _mapper.Map<List<DemoModel>>(task.Result));
+        }
 
-            var dbModel = await _demoDbModelRepository.GetByIdAsync(id);
-            var commonInfo = await _demoDbModelRepository.GetCommonInfoByDemoIdAsync(id);
+        public async Task<DemoModel> AddDemoModelAsync(DemoModel model)
+        {
+            var result = _mapper.Map<DemoModel>(model);
 
-            var demoModel = new DemoModel
-            {
-                Id = dbModel.Id,
-                Name = dbModel.Name,
-                Created = dbModel.Created,
-                Modified = dbModel.Modified,
-                CommonInfo = commonInfo.CommonInfo
-            };
+            result.Id = model.Id + 1;
+            result.CommonInfo = model.CommonInfo;
+            result.Created = DateTime.UtcNow;
+            result.Modified = DateTime.Now;
+            result.Name = "'Default name' please change.";
 
-            return demoModel;
+            return result;
         }
     }
 }

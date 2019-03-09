@@ -24,7 +24,7 @@ namespace MLA_task
             MapperSetup(container);
             ValidationSetup(config, container);
             LoggerSetup(container);
-
+            
             container.RegisterWebApiControllers(config);
             container.Verify(VerificationOption.VerifyOnly);
             config.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
