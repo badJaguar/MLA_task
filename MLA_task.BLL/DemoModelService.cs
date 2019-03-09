@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MLA_task.BLL.Interface;
 using MLA_task.BLL.Interface.Exceptions;
 using MLA_task.BLL.Interface.Models;
 using MLA_task.DAL.Interface;
-using MLA_task.DAL.Interface.Entities;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MLA_task.BLL
 {
