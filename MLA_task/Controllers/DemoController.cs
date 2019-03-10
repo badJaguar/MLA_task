@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -100,7 +101,19 @@ namespace MLA_task.Controllers
                 _logger.Error(ex, $"Server error occured while trying to add item with name {model.Name}");
                 return this.InternalServerError();
             }
+        }
 
+        [System.Web.Http.HttpDelete]
+        [System.Web.Http.Route("{id:int:min(1)}")]
+        [SwaggerResponse(HttpStatusCode.NoContent, Description = "Deletes an existed model.")]
+        [SwaggerResponse(HttpStatusCode.BadRequest)]
+        [SwaggerResponse(HttpStatusCode.Conflict)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.InternalServerError)]
+        public async Task<IHttpActionResult> DeleteHive([FromUri] int id)
+        {
+            await _demoModelService.DeleteModelByIdAsync(id);
+            return ResponseMessage(Request.CreateResponse(HttpStatusCode.NoContent));
         }
     }
 }

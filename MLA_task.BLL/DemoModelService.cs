@@ -5,6 +5,7 @@ using MLA_task.BLL.Interface.Models;
 using MLA_task.DAL.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MLA_task.BLL
@@ -25,29 +26,38 @@ namespace MLA_task.BLL
             if (id == 23) {
                 throw new DemoServiceException(DemoServiceException.ErrorType.WrongId);
             }
-            return await _demoDbModelRepository.GetByIdAsync(id)
-                .ContinueWith(t => _mapper.Map<DemoModel>(t.Result));
+                var result =  await _demoDbModelRepository.GetByIdAsync(id);
+                return _mapper.Map<DemoModel>(result);
             
         }
         
         public async Task<List<DemoModel>> GetDemoModelsAsync()
         {
-            return await _demoDbModelRepository.GetAll()
-                .ContinueWith(task =>
-                    _mapper.Map<List<DemoModel>>(task.Result));
+            //return await _demoDbModelRepository.GetAll()
+            //    .ContinueWith(task =>
+            //        _mapper.Map<List<DemoModel>>(task.Result));
+
+            var list = await _demoDbModelRepository.GetAll();
+            return list.Select(model => _mapper.Map<DemoModel>(model)).ToList();
+
+            //var task = _demoDbModelRepository.GetAll();
+            //var result = task.ContinueWith(task1 =>
+            //_mapper.Map<List<DemoModel>>(task1.Result));
+            //return await result;
         }
 
         public async Task<DemoModel> AddDemoModelAsync(DemoModel model)
         {
             var result = _mapper.Map<DemoModel>(model);
 
-            result.Id = model.Id + 1;
+            result.Id = model.Id;
             result.CommonInfo = model.CommonInfo;
-            result.Created = DateTime.UtcNow;
-            result.Modified = DateTime.Now;
             result.Name = "'Default name' please change.";
 
             return result;
         }
+
+        public async Task DeleteModelByIdAsync(int id) => 
+            await _demoDbModelRepository.DeleteAsync(id);
     }
 }
