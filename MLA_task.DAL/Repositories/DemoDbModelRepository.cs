@@ -27,7 +27,8 @@ namespace MLA_task.DAL.Repositories
 
         public async Task<List<DemoDbModel>> GetAll()
         {
-            var models = await _context.DemoDbModels.Select(model => model).ToListAsync();
+            var models = await _context.DemoDbModels.Select(model => 
+                model).ToListAsync();
             return models;
         }
 
@@ -39,28 +40,24 @@ namespace MLA_task.DAL.Repositories
             return model;
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var models = await _context.DemoDbModels.Where(dbModel => dbModel.Id == id).ToListAsync();
+            var model = models[0];
+            _context.DemoDbModels.Remove(model);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<DemoCommonInfoDbModel> GetCommonInfoByDemoIdAsync(int demoDbModelId)
         {
             var demoModel = 
                 await _context.DemoDbModels.SingleAsync(item => item.Id == demoDbModelId);
 
             var commonInfo = 
-                await _context.DemoCommonInfoModels.SingleAsync(item => item.Id == demoModel.DemoCommonInfoModelId);
+                await _context.DemoCommonInfoModels.SingleAsync(item => 
+                    item.Id == demoModel.DemoCommonInfoModelId);
 
             return commonInfo;
         }
-
-        public async Task<IEnumerable<T>> Find<T>(Func<T, bool> predicate) where T : class
-        {
-            return await Task.FromResult(_context.Set<T>().Where(predicate));
-        }
-
-        //public async Task<List<DemoCommonInfoDbModel>> GetCommonInfosAsync()
-        //{
-        //    var commonInfo =
-        //        await _context.DemoCommonInfoModels.Select(model => model).ToListAsync();
-
-        //    return commonInfo;
-        //}
     }
 }

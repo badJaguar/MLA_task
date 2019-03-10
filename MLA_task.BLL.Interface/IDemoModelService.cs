@@ -9,5 +9,6 @@ namespace MLA_task.BLL.Interface
         Task<DemoModel> GetDemoModelByIdAsync(int id);
         Task<List<DemoModel>> GetDemoModelsAsync();
         Task<DemoModel> AddDemoModelAsync(DemoModel model);
+        Task DeleteModelByIdAsync(int id);
     }
 }
