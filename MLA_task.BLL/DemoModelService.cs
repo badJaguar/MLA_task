@@ -5,6 +5,7 @@ using MLA_task.BLL.Interface.Models;
 using MLA_task.DAL.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MLA_task.BLL
@@ -32,9 +33,12 @@ namespace MLA_task.BLL
         
         public async Task<List<DemoModel>> GetDemoModelsAsync()
         {
-            return await _demoDbModelRepository.GetAll()
-                .ContinueWith(task =>
-                    _mapper.Map<List<DemoModel>>(task.Result));
+            //return await _demoDbModelRepository.GetAll()
+            //    .ContinueWith(task =>
+            //        _mapper.Map<List<DemoModel>>(task.Result));
+
+                var list = await _demoDbModelRepository.GetAll();
+                return list.Select(model => _mapper.Map<DemoModel>(model)).ToList();
         }
 
         public async Task<DemoModel> AddDemoModelAsync(DemoModel model)
