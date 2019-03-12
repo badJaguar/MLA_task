@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MLA_task.DAL.Interface.Entities;
 
 namespace MLA_task.BLL
 {
@@ -48,13 +49,15 @@ namespace MLA_task.BLL
 
         public async Task<DemoModel> AddDemoModelAsync(DemoModel model)
         {
-            var result = _mapper.Map<DemoModel>(model);
+            var m = _mapper.Map<DemoModel, DemoDbModel>(model);
 
-            result.Id = model.Id;
-            result.CommonInfo = model.CommonInfo;
-            result.Name = "'Default name' please change.";
+            var result = await _demoDbModelRepository.AddAsync(m);
 
-            return result;
+            //result.Id = model.Id;
+            //result.CommonInfo = model.CommonInfo;
+            //result.Name = "'Default name' please change.";
+
+            return _mapper.Map<DemoDbModel, DemoModel>(result);
         }
 
         public async Task DeleteModelByIdAsync(int id) => 
